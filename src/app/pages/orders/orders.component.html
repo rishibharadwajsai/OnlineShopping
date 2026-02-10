@@ -1,0 +1,102 @@
+<!-- ============ ORDERS PAGE ============ -->
+<section class="min-h-screen py-12 sm:py-16" style="background-color: var(--color-warm-white);">
+  <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+
+    <!-- Header -->
+    <div class="mb-10">
+      <button (click)="goHome()"
+              class="flex items-center gap-2 text-xs tracking-[0.1em] uppercase mb-6 transition-all duration-300"
+              style="font-family: var(--font-body); color: var(--color-ash);"
+              onmouseover="this.style.color='var(--color-gold-dark)'"
+              onmouseout="this.style.color='var(--color-ash)'">
+        <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M10.5 19.5L3 12m0 0l7.5-7.5M3 12h18" />
+        </svg>
+        Back to Home
+      </button>
+      <h1 class="text-3xl sm:text-4xl" style="font-family: var(--font-heading); color: var(--color-charcoal);">
+        Order History
+      </h1>
+      <div class="divider-gold mt-3"></div>
+    </div>
+
+    <!-- Not Logged In -->
+    <div *ngIf="!isLoggedIn" class="text-center py-20 animate-fade-in">
+      <div class="w-24 h-24 rounded-full flex items-center justify-center mx-auto mb-6"
+           style="background-color: var(--color-parchment);">
+        <svg xmlns="http://www.w3.org/2000/svg" class="w-10 h-10" style="color: var(--color-pearl);" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M16.5 10.5V6.75a4.5 4.5 0 10-9 0v3.75m-.75 11.25h10.5a2.25 2.25 0 002.25-2.25v-6.75a2.25 2.25 0 00-2.25-2.25H6.75a2.25 2.25 0 00-2.25 2.25v6.75a2.25 2.25 0 002.25 2.25z" />
+        </svg>
+      </div>
+      <h2 class="text-2xl mb-3" style="font-family: var(--font-heading); color: var(--color-charcoal);">
+        Sign In Required
+      </h2>
+      <p class="text-base mb-8" style="font-family: var(--font-subheading); color: var(--color-ash); font-style: italic;">
+        Please sign in to view your order history.
+      </p>
+    </div>
+
+    <!-- Orders List -->
+    <div *ngIf="isLoggedIn" class="space-y-6">
+      <div *ngFor="let order of orders; let i = index"
+           class="rounded-sm overflow-hidden animate-fade-in-up"
+           style="background: white; border: 1px solid var(--color-pearl); box-shadow: var(--shadow-subtle);"
+           [style.animation-delay]="(i * 100) + 'ms'">
+
+        <!-- Order Header -->
+        <div class="px-6 py-4 flex flex-col sm:flex-row sm:items-center justify-between gap-3"
+             style="background-color: var(--color-parchment);">
+          <div class="flex items-center gap-6">
+            <div>
+              <span class="text-[10px] tracking-[0.15em] uppercase block" style="font-family: var(--font-body); color: var(--color-ash);">
+                Order
+              </span>
+              <span class="text-sm font-medium" style="font-family: var(--font-heading); color: var(--color-charcoal);">
+                {{ order.id }}
+              </span>
+            </div>
+            <div>
+              <span class="text-[10px] tracking-[0.15em] uppercase block" style="font-family: var(--font-body); color: var(--color-ash);">
+                Date
+              </span>
+              <span class="text-sm" style="font-family: var(--font-body); color: var(--color-charcoal);">
+                {{ order.date | date:'mediumDate' }}
+              </span>
+            </div>
+          </div>
+          <div class="flex items-center gap-4">
+            <span class="px-3 py-1 text-[10px] tracking-[0.1em] uppercase rounded-sm font-medium"
+                  [style.color]="getStatusColor(order.status)"
+                  [style.background-color]="getStatusColor(order.status) + '12'"
+                  [style.border]="'1px solid ' + getStatusColor(order.status) + '30'"
+                  style="font-family: var(--font-body);">
+              {{ order.status }}
+            </span>
+            <span class="text-base" style="font-family: var(--font-heading); color: var(--color-charcoal);">
+              {{ order.total | currency:'USD':'symbol':'1.0-0' }}
+            </span>
+          </div>
+        </div>
+
+        <!-- Order Items -->
+        <div class="px-6 py-4">
+          <div *ngFor="let item of order.items; let last = last"
+               class="flex items-center gap-4 py-3"
+               [style.border-bottom]="!last ? '1px solid var(--color-parchment)' : 'none'">
+            <img [src]="item.imageUrl" [alt]="item.productName"
+                 class="w-14 h-14 object-cover rounded-sm flex-shrink-0" />
+            <div class="flex-1">
+              <p class="text-sm" style="font-family: var(--font-heading); color: var(--color-charcoal);">
+                {{ item.productName }}
+              </p>
+              <p class="text-xs mt-0.5" style="font-family: var(--font-body); color: var(--color-ash);">
+                Qty: {{ item.quantity }} · {{ item.price | currency:'USD':'symbol':'1.0-0' }}
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>

@@ -1,0 +1,274 @@
+<!-- ============ PRODUCT DETAIL PAGE ============ -->
+
+<!-- Loading Skeleton -->
+<section *ngIf="isLoading" class="py-12 sm:py-16" style="background-color: var(--color-warm-white);">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
+      <div class="skeleton rounded-sm" style="aspect-ratio: 4/5;"></div>
+      <div class="space-y-4 py-8">
+        <div class="skeleton h-4 w-24"></div>
+        <div class="skeleton h-10 w-3/4"></div>
+        <div class="skeleton h-4 w-1/2"></div>
+        <div class="skeleton h-8 w-32 mt-6"></div>
+        <div class="skeleton h-20 w-full mt-6"></div>
+        <div class="skeleton h-14 w-48 mt-8"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Product Not Found -->
+<section *ngIf="!isLoading && !product" class="py-20 text-center" style="background-color: var(--color-warm-white);">
+  <div class="max-w-7xl mx-auto px-4">
+    <h2 class="text-2xl mb-4" style="font-family: var(--font-heading); color: var(--color-charcoal);">Product Not Found</h2>
+    <p class="text-base mb-8" style="font-family: var(--font-subheading); color: var(--color-ash); font-style: italic;">
+      This piece may no longer be available in our collection.
+    </p>
+    <button (click)="goBack()" class="btn-luxury btn-luxury-primary px-8 py-4 text-xs tracking-[0.2em]">
+      Return to Collection
+    </button>
+  </div>
+</section>
+
+<!-- Product Detail -->
+<section *ngIf="!isLoading && product" class="py-12 sm:py-16" style="background-color: var(--color-warm-white);">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+
+    <!-- Breadcrumb -->
+    <div class="flex items-center gap-2 mb-8 text-xs tracking-[0.1em] uppercase" style="font-family: var(--font-body); color: var(--color-ash);">
+      <a routerLink="/" class="transition-colors duration-300 cursor-pointer"
+         onmouseover="this.style.color='var(--color-gold-dark)'"
+         onmouseout="this.style.color='var(--color-ash)'">Home</a>
+      <span style="color: var(--color-pearl);">/</span>
+      <a routerLink="/" fragment="collection" class="transition-colors duration-300 cursor-pointer"
+         onmouseover="this.style.color='var(--color-gold-dark)'"
+         onmouseout="this.style.color='var(--color-ash)'">Collection</a>
+      <span style="color: var(--color-pearl);">/</span>
+      <span style="color: var(--color-charcoal);">{{ product.name }}</span>
+    </div>
+
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16">
+
+      <!-- Left: Product Image -->
+      <div class="relative animate-fade-in-up">
+        <div class="rounded-sm overflow-hidden" style="box-shadow: var(--shadow-elevated);">
+          <img [src]="product.imageUrl"
+               [alt]="product.name"
+               class="w-full h-auto object-cover"
+               style="aspect-ratio: 4/5;" />
+        </div>
+        <!-- Badges -->
+        <div class="absolute top-4 left-4 flex flex-col gap-2">
+          <span *ngIf="discountPercent"
+                class="inline-block px-3 py-1.5 text-[10px] tracking-[0.1em] uppercase font-medium rounded-sm"
+                style="background-color: var(--color-error); color: white; font-family: var(--font-body);">
+            Save {{ discountPercent }}%
+          </span>
+          <span *ngIf="product.featured"
+                class="inline-block px-3 py-1.5 text-[10px] tracking-[0.1em] uppercase font-medium rounded-sm"
+                style="background-color: var(--color-gold); color: white; font-family: var(--font-body);">
+            Featured
+          </span>
+        </div>
+        <!-- Decorative Frame -->
+        <div class="absolute -top-3 -right-3 w-full h-full rounded-sm pointer-events-none hidden lg:block"
+             style="border: 1px solid var(--color-gold-light); opacity: 0.4;"></div>
+      </div>
+
+      <!-- Right: Product Info -->
+      <div class="py-2 lg:py-6 animate-fade-in-up" style="animation-delay: 150ms;">
+        <!-- Category -->
+        <span class="text-[10px] tracking-[0.3em] uppercase block mb-3"
+              style="font-family: var(--font-body); color: var(--color-gold-dark);">
+          {{ product.category }}
+        </span>
+
+        <!-- Name -->
+        <h1 class="text-3xl sm:text-4xl mb-4"
+            style="font-family: var(--font-heading); color: var(--color-charcoal); font-weight: 500; line-height: 1.2;">
+          {{ product.name }}
+        </h1>
+
+        <!-- Rating -->
+        <div class="flex items-center gap-2 mb-6">
+          <div class="flex items-center gap-0.5">
+            <ng-container *ngFor="let star of [1,2,3,4,5]">
+              <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4"
+                   [style.color]="star <= product.rating ? 'var(--color-gold)' : 'var(--color-pearl)'"
+                   fill="currentColor" viewBox="0 0 20 20">
+                <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/>
+              </svg>
+            </ng-container>
+          </div>
+          <span class="text-xs" style="font-family: var(--font-body); color: var(--color-ash);">
+            {{ product.rating }} · {{ product.reviewCount }} reviews
+          </span>
+        </div>
+
+        <!-- Price -->
+        <div class="flex items-baseline gap-3 mb-6">
+          <span class="text-3xl" style="font-family: var(--font-heading); color: var(--color-charcoal);">
+            {{ product.price | currency:'USD':'symbol':'1.0-0' }}
+          </span>
+          <span *ngIf="product.originalPrice && product.originalPrice > product.price"
+                class="text-lg line-through"
+                style="color: var(--color-ash); font-family: var(--font-body);">
+            {{ product.originalPrice | currency:'USD':'symbol':'1.0-0' }}
+          </span>
+        </div>
+
+        <!-- Gold Divider -->
+        <div class="w-12 h-px mb-6" style="background: var(--color-gold-light);"></div>
+
+        <!-- Description -->
+        <p class="text-base mb-8 leading-relaxed"
+           style="font-family: var(--font-subheading); color: var(--color-slate); font-style: italic; line-height: 1.8;">
+          {{ product.description }}
+        </p>
+
+        <!-- Stock Status -->
+        <div class="flex items-center gap-2 mb-6">
+          <div class="w-2 h-2 rounded-full"
+               [style.background-color]="product.inStock ? 'var(--color-success)' : 'var(--color-error)'">
+          </div>
+          <span class="text-xs tracking-[0.1em] uppercase"
+                [style.color]="product.inStock ? 'var(--color-success)' : 'var(--color-error)'"
+                style="font-family: var(--font-body);">
+            {{ product.inStock ? 'In Stock' : 'Out of Stock' }}
+          </span>
+        </div>
+
+        <!-- Quantity & Add to Cart -->
+        <div class="flex flex-col sm:flex-row items-stretch sm:items-center gap-4 mb-8">
+          <!-- Quantity Selector -->
+          <div class="flex items-center rounded-sm overflow-hidden" style="border: 1px solid var(--color-pearl);">
+            <button (click)="decrementQuantity()"
+                    class="w-11 h-11 flex items-center justify-center transition-all duration-300"
+                    style="color: var(--color-slate);"
+                    onmouseover="this.style.backgroundColor='var(--color-parchment)'"
+                    onmouseout="this.style.backgroundColor='transparent'">
+              <svg xmlns="http://www.w3.org/2000/svg" class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 12h-15" />
+              </svg>
+            </button>
+            <span class="w-12 text-center text-sm" style="font-family: var(--font-heading); color: var(--color-charcoal);">
+              {{ quantity }}
+            </span>
+            <button (click)="incrementQuantity()"
+                    class="w-11 h-11 flex items-center justify-center transition-all duration-300"
+                    style="color: var(--color-slate);"
+                    onmouseover="this.style.backgroundColor='var(--color-parchment)'"
+                    onmouseout="this.style.backgroundColor='transparent'">
+              <svg xmlns="http://www.w3.org/2000/svg" class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
+              </svg>
+            </button>
+          </div>
+
+          <!-- Add to Cart Button -->
+          <button (click)="addToCart()"
+                  [disabled]="!product.inStock"
+                  class="btn-luxury flex-1 py-3.5 text-xs tracking-[0.15em]"
+                  [style.background-color]="isAdding ? 'var(--color-success)' : 'var(--color-charcoal)'"
+                  [style.opacity]="product.inStock ? '1' : '0.5'"
+                  style="color: var(--color-cream);">
+            {{ isAdding ? '✓ Added to Cart' : isInCart ? 'Add Another' : 'Add to Cart' }}
+          </button>
+        </div>
+
+        <!-- Info tabs -->
+        <div class="rounded-sm overflow-hidden" style="border: 1px solid var(--color-parchment);">
+          <div class="flex" style="border-bottom: 1px solid var(--color-parchment);">
+            <button *ngFor="let tab of ['description', 'details', 'shipping']"
+                    (click)="selectedTab = $any(tab)"
+                    class="flex-1 py-3 text-[10px] tracking-[0.12em] uppercase text-center transition-all duration-300"
+                    [style.background-color]="selectedTab === tab ? 'var(--color-parchment)' : 'transparent'"
+                    [style.color]="selectedTab === tab ? 'var(--color-charcoal)' : 'var(--color-ash)'"
+                    style="font-family: var(--font-body);">
+              {{ tab }}
+            </button>
+          </div>
+          <div class="p-5">
+            <div *ngIf="selectedTab === 'description'">
+              <p class="text-sm leading-relaxed" style="font-family: var(--font-body); color: var(--color-slate); line-height: 1.8;">
+                {{ product.description }}
+              </p>
+            </div>
+            <div *ngIf="selectedTab === 'details'">
+              <ul class="space-y-2 text-sm" style="font-family: var(--font-body); color: var(--color-slate);">
+                <li class="flex justify-between py-1" style="border-bottom: 1px solid var(--color-parchment);">
+                  <span style="color: var(--color-ash);">Category</span>
+                  <span>{{ product.category }}</span>
+                </li>
+                <li class="flex justify-between py-1" style="border-bottom: 1px solid var(--color-parchment);">
+                  <span style="color: var(--color-ash);">Rating</span>
+                  <span>{{ product.rating }} / 5.0</span>
+                </li>
+                <li class="flex justify-between py-1" style="border-bottom: 1px solid var(--color-parchment);">
+                  <span style="color: var(--color-ash);">Reviews</span>
+                  <span>{{ product.reviewCount }}</span>
+                </li>
+                <li class="flex justify-between py-1">
+                  <span style="color: var(--color-ash);">Availability</span>
+                  <span [style.color]="product.inStock ? 'var(--color-success)' : 'var(--color-error)'">
+                    {{ product.inStock ? 'In Stock' : 'Out of Stock' }}
+                  </span>
+                </li>
+              </ul>
+            </div>
+            <div *ngIf="selectedTab === 'shipping'">
+              <ul class="space-y-3 text-sm" style="font-family: var(--font-body); color: var(--color-slate); line-height: 1.8;">
+                <li class="flex items-start gap-2">
+                  <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 mt-0.5 flex-shrink-0" style="color: var(--color-gold);" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5" />
+                  </svg>
+                  Complimentary shipping on orders over $500
+                </li>
+                <li class="flex items-start gap-2">
+                  <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 mt-0.5 flex-shrink-0" style="color: var(--color-gold);" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5" />
+                  </svg>
+                  Estimated delivery: 5–7 business days
+                </li>
+                <li class="flex items-start gap-2">
+                  <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 mt-0.5 flex-shrink-0" style="color: var(--color-gold);" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5" />
+                  </svg>
+                  30-day complimentary return policy
+                </li>
+                <li class="flex items-start gap-2">
+                  <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 mt-0.5 flex-shrink-0" style="color: var(--color-gold);" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5" />
+                  </svg>
+                  Gift wrapping available at checkout
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Related Products -->
+    <div *ngIf="relatedProducts.length > 0" class="mt-20">
+      <div class="text-center mb-12">
+        <span class="text-[10px] tracking-[0.35em] uppercase block mb-3"
+              style="font-family: var(--font-body); color: var(--color-gold-dark);">
+          You May Also Like
+        </span>
+        <h2 class="text-2xl sm:text-3xl" style="font-family: var(--font-heading); color: var(--color-charcoal);">
+          Related Pieces
+        </h2>
+        <div class="divider-gold-center mt-3"></div>
+      </div>
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 stagger-children">
+        <app-product-card
+          *ngFor="let related of relatedProducts"
+          [product]="related"
+          class="animate-fade-in-up">
+        </app-product-card>
+      </div>
+    </div>
+
+  </div>
+</section>

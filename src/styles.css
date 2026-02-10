@@ -1,1 +1,313 @@
-/* You can add global styles to this file, and also import other style files */
+/* ============================================
+   MAISON — Old Money Luxury Design System
+   ============================================ */
+
+/* ---------- CSS Custom Properties ---------- */
+:root {
+  /* Primary Palette */
+  --color-ivory: #FFFFF0;
+  --color-cream: #FAF9F6;
+  --color-warm-white: #FDFBF7;
+  --color-parchment: #F5F0E8;
+  --color-linen: #EDE8DF;
+
+  /* Accent — Muted Gold */
+  --color-gold: #C5A572;
+  --color-gold-light: #D4C4A0;
+  --color-gold-dark: #A68B59;
+  --color-gold-muted: #BCA77C;
+
+  /* Neutrals */
+  --color-charcoal: #2C2C2C;
+  --color-graphite: #3D3D3D;
+  --color-slate: #5A5A5A;
+  --color-ash: #8A8A8A;
+  --color-silver: #B0ACA4;
+  --color-pearl: #D6D2CA;
+
+  /* Semantic */
+  --color-success: #6B8F71;
+  --color-error: #A65D57;
+  --color-info: #6B7FA6;
+
+  /* Typography */
+  --font-heading: 'Playfair Display', 'Georgia', serif;
+  --font-subheading: 'Cormorant Garamond', 'Garamond', serif;
+  --font-body: 'Inter', 'Helvetica Neue', sans-serif;
+
+  /* Spacing Scale */
+  --space-xs: 0.25rem;
+  --space-sm: 0.5rem;
+  --space-md: 1rem;
+  --space-lg: 1.5rem;
+  --space-xl: 2rem;
+  --space-2xl: 3rem;
+  --space-3xl: 4rem;
+  --space-4xl: 6rem;
+
+  /* Shadows */
+  --shadow-subtle: 0 1px 3px rgba(44, 44, 44, 0.04), 0 1px 2px rgba(44, 44, 44, 0.06);
+  --shadow-soft: 0 4px 12px rgba(44, 44, 44, 0.05), 0 2px 4px rgba(44, 44, 44, 0.04);
+  --shadow-elevated: 0 10px 30px rgba(44, 44, 44, 0.08), 0 4px 8px rgba(44, 44, 44, 0.04);
+  --shadow-floating: 0 20px 60px rgba(44, 44, 44, 0.1), 0 8px 16px rgba(44, 44, 44, 0.06);
+  --shadow-gold: 0 4px 16px rgba(197, 165, 114, 0.15);
+
+  /* Transitions */
+  --ease-luxury: cubic-bezier(0.25, 0.1, 0.25, 1);
+  --duration-fast: 200ms;
+  --duration-base: 350ms;
+  --duration-slow: 500ms;
+  --duration-glacial: 800ms;
+
+  /* Border Radius */
+  --radius-sm: 4px;
+  --radius-md: 8px;
+  --radius-lg: 12px;
+  --radius-xl: 16px;
+}
+
+/* ---------- Base Reset & Body ---------- */
+*, *::before, *::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  font-family: var(--font-body);
+  background-color: var(--color-warm-white);
+  color: var(--color-charcoal);
+  line-height: 1.7;
+  font-weight: 400;
+  letter-spacing: 0.01em;
+  overflow-x: hidden;
+}
+
+/* ---------- Typography Utilities ---------- */
+.font-heading {
+  font-family: var(--font-heading);
+  font-weight: 500;
+  letter-spacing: -0.02em;
+  line-height: 1.2;
+}
+
+.font-subheading {
+  font-family: var(--font-subheading);
+  font-weight: 400;
+  letter-spacing: 0.02em;
+  line-height: 1.4;
+}
+
+.font-body {
+  font-family: var(--font-body);
+  font-weight: 400;
+  line-height: 1.7;
+}
+
+/* ---------- Luxury Button Styles ---------- */
+.btn-luxury {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0.75rem 2rem;
+  font-family: var(--font-body);
+  font-size: 0.8rem;
+  font-weight: 500;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  border: none;
+  cursor: pointer;
+  transition: all var(--duration-base) var(--ease-luxury);
+  position: relative;
+  overflow: hidden;
+}
+
+.btn-luxury-primary {
+  background-color: var(--color-charcoal);
+  color: var(--color-cream);
+}
+.btn-luxury-primary:hover {
+  background-color: var(--color-graphite);
+  box-shadow: var(--shadow-elevated);
+  transform: translateY(-1px);
+}
+
+.btn-luxury-gold {
+  background-color: var(--color-gold);
+  color: white;
+}
+.btn-luxury-gold:hover {
+  background-color: var(--color-gold-dark);
+  box-shadow: var(--shadow-gold);
+  transform: translateY(-1px);
+}
+
+.btn-luxury-outline {
+  background: transparent;
+  border: 1px solid var(--color-pearl);
+  color: var(--color-charcoal);
+}
+.btn-luxury-outline:hover {
+  border-color: var(--color-gold);
+  color: var(--color-gold-dark);
+  background: rgba(197, 165, 114, 0.04);
+}
+
+/* ---------- Card Styles ---------- */
+.card-luxury {
+  background: white;
+  border: 1px solid rgba(214, 210, 202, 0.5);
+  box-shadow: var(--shadow-subtle);
+  transition: all var(--duration-base) var(--ease-luxury);
+}
+.card-luxury:hover {
+  box-shadow: var(--shadow-elevated);
+  border-color: var(--color-gold-light);
+  transform: translateY(-4px);
+}
+
+/* ---------- Gold Accent Divider ---------- */
+.divider-gold {
+  width: 60px;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--color-gold), transparent);
+  margin: 1rem 0;
+}
+
+.divider-gold-center {
+  width: 60px;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--color-gold), transparent);
+  margin: 1rem auto;
+}
+
+/* ---------- Scrollbar Styling ---------- */
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  background: var(--color-cream);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--color-pearl);
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--color-gold-light);
+}
+
+/* ---------- Selection ---------- */
+::selection {
+  background-color: rgba(197, 165, 114, 0.2);
+  color: var(--color-charcoal);
+}
+
+/* ---------- Custom Animations ---------- */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(24px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes shimmer {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes pulse-gold {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(197, 165, 114, 0.4); }
+  50% { box-shadow: 0 0 0 8px rgba(197, 165, 114, 0); }
+}
+
+.animate-fade-in-up {
+  animation: fadeInUp 0.6s var(--ease-luxury) both;
+}
+
+.animate-fade-in {
+  animation: fadeIn 0.5s var(--ease-luxury) both;
+}
+
+.animate-slide-down {
+  animation: slideDown 0.3s var(--ease-luxury) both;
+}
+
+/* Stagger children animation */
+.stagger-children > *:nth-child(1) { animation-delay: 0ms; }
+.stagger-children > *:nth-child(2) { animation-delay: 80ms; }
+.stagger-children > *:nth-child(3) { animation-delay: 160ms; }
+.stagger-children > *:nth-child(4) { animation-delay: 240ms; }
+.stagger-children > *:nth-child(5) { animation-delay: 320ms; }
+.stagger-children > *:nth-child(6) { animation-delay: 400ms; }
+.stagger-children > *:nth-child(7) { animation-delay: 480ms; }
+.stagger-children > *:nth-child(8) { animation-delay: 560ms; }
+.stagger-children > *:nth-child(9) { animation-delay: 640ms; }
+.stagger-children > *:nth-child(10) { animation-delay: 720ms; }
+.stagger-children > *:nth-child(11) { animation-delay: 800ms; }
+.stagger-children > *:nth-child(12) { animation-delay: 880ms; }
+
+/* ---------- Skeleton Loading ---------- */
+.skeleton {
+  background: linear-gradient(90deg, var(--color-parchment) 25%, var(--color-linen) 50%, var(--color-parchment) 75%);
+  background-size: 200% 100%;
+  animation: shimmer 1.5s infinite;
+  border-radius: var(--radius-sm);
+}
+
+/* ---------- Toast Notification ---------- */
+.toast-luxury {
+  position: fixed;
+  bottom: 2rem;
+  right: 2rem;
+  padding: 1rem 1.5rem;
+  background: var(--color-charcoal);
+  color: var(--color-cream);
+  font-family: var(--font-body);
+  font-size: 0.85rem;
+  letter-spacing: 0.02em;
+  border-left: 3px solid var(--color-gold);
+  box-shadow: var(--shadow-floating);
+  z-index: 9999;
+  animation: slideDown 0.3s var(--ease-luxury) both;
+}
+
+/* ---------- Link Styles ---------- */
+a {
+  color: inherit;
+  text-decoration: none;
+  transition: color var(--duration-fast) var(--ease-luxury);
+}
+
+/* ---------- Image defaults ---------- */
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}

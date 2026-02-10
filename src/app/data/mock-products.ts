@@ -1,0 +1,212 @@
+import { Product } from '../models/product.model';
+
+export const MOCK_PRODUCTS: Product[] = [
+  {
+    id: 1,
+    name: 'Heritage Chronograph',
+    description: 'A masterfully crafted timepiece with Swiss movement, sapphire crystal, and hand-stitched alligator leather strap. The embodiment of timeless elegance.',
+    price: 4250,
+    originalPrice: 5000,
+    category: 'Watches',
+    imageUrl: 'https://images.unsplash.com/photo-1523170335258-f5ed11844a49?w=600&h=700&fit=crop',
+    rating: 4.9,
+    reviewCount: 127,
+    inStock: true,
+    featured: true,
+    tags: ['bestseller', 'luxury']
+  },
+  {
+    id: 2,
+    name: 'Cashmere Overcoat',
+    description: 'Double-breasted Italian cashmere overcoat with horn buttons. Tailored silhouette with a subtle herringbone pattern.',
+    price: 2890,
+    category: 'Apparel',
+    imageUrl: 'https://images.unsplash.com/photo-1539533018447-63fcce2678e3?w=600&h=700&fit=crop',
+    rating: 4.8,
+    reviewCount: 83,
+    inStock: true,
+    featured: true,
+    tags: ['new-arrival']
+  },
+  {
+    id: 3,
+    name: 'Leather Attaché Case',
+    description: 'Full-grain Florentine leather briefcase with brass hardware and suede-lined interior. Handcrafted in our Tuscan atelier.',
+    price: 1650,
+    category: 'Accessories',
+    imageUrl: 'https://images.unsplash.com/photo-1548036328-c9fa89d128fa?w=600&h=700&fit=crop',
+    rating: 4.7,
+    reviewCount: 56,
+    inStock: true,
+    tags: ['handcrafted']
+  },
+  {
+    id: 4,
+    name: 'Silk Pocket Square Set',
+    description: 'Collection of four hand-rolled Italian silk pocket squares in seasonal palettes. Presented in a linen gift box.',
+    price: 320,
+    category: 'Accessories',
+    imageUrl: 'https://images.unsplash.com/photo-1598532163257-ae3c6b2524b6?w=600&h=700&fit=crop',
+    rating: 4.6,
+    reviewCount: 94,
+    inStock: true,
+    tags: ['gift']
+  },
+  {
+    id: 5,
+    name: 'Merino Wool Suit',
+    description: 'Bespoke-inspired Super 150s merino wool suit in charcoal. Half-canvas construction with hand-finished lapels.',
+    price: 3200,
+    originalPrice: 3800,
+    category: 'Apparel',
+    imageUrl: 'https://images.unsplash.com/photo-1594938298603-c8148c4dae35?w=600&h=700&fit=crop',
+    rating: 4.9,
+    reviewCount: 61,
+    inStock: true,
+    featured: true,
+    tags: ['bestseller']
+  },
+  {
+    id: 6,
+    name: 'Crystal Decanter Set',
+    description: 'Hand-cut lead crystal decanter with four matching old-fashioned glasses. A distinguished addition to any gentleman\'s study.',
+    price: 890,
+    category: 'Home',
+    imageUrl: 'https://images.unsplash.com/photo-1582819509237-d5b75f20ff7a?w=600&h=700&fit=crop',
+    rating: 4.8,
+    reviewCount: 45,
+    inStock: true,
+    tags: ['gift', 'home']
+  },
+  {
+    id: 7,
+    name: 'Calfskin Oxford Shoes',
+    description: 'Blake-stitched Italian calfskin oxfords with Goodyear welt sole. Hand-burnished in our Bologna workshop.',
+    price: 1200,
+    category: 'Footwear',
+    imageUrl: 'https://images.unsplash.com/photo-1614252369475-531eba835eb1?w=600&h=700&fit=crop',
+    rating: 4.7,
+    reviewCount: 72,
+    inStock: true,
+    tags: ['handcrafted']
+  },
+  {
+    id: 8,
+    name: 'Gold Cufflinks',
+    description: '18-karat gold cufflinks with mother-of-pearl inlay and engraved monogram option. Presented in a walnut display box.',
+    price: 780,
+    originalPrice: 950,
+    category: 'Accessories',
+    imageUrl: 'https://images.unsplash.com/photo-1611652022419-a9419f74343d?w=600&h=700&fit=crop',
+    rating: 4.5,
+    reviewCount: 38,
+    inStock: true,
+    tags: ['gift']
+  },
+  {
+    id: 9,
+    name: 'Fountain Pen — Onyx',
+    description: 'Limited edition fountain pen in polished onyx resin with 18k gold nib. Each pen is individually numbered and signed.',
+    price: 560,
+    category: 'Accessories',
+    imageUrl: 'https://images.unsplash.com/photo-1583485088034-697b5bc54ccd?w=600&h=700&fit=crop',
+    rating: 4.8,
+    reviewCount: 29,
+    inStock: true,
+    featured: true,
+    tags: ['limited-edition']
+  },
+  {
+    id: 10,
+    name: 'Velvet Smoking Jacket',
+    description: 'Italian velvet smoking jacket with silk shawl collar and frog closures. A nod to aristocratic evening wear.',
+    price: 1850,
+    category: 'Apparel',
+    imageUrl: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=600&h=700&fit=crop',
+    rating: 4.6,
+    reviewCount: 33,
+    inStock: true,
+    tags: ['new-arrival']
+  },
+  {
+    id: 11,
+    name: 'Cognac Leather Gloves',
+    description: 'Unlined peccary leather gloves in rich cognac. Hand-sewn using traditional points, perfect for autumn drives.',
+    price: 420,
+    category: 'Accessories',
+    imageUrl: 'https://images.unsplash.com/photo-1531310197839-ccf54634509e?w=600&h=700&fit=crop',
+    rating: 4.4,
+    reviewCount: 51,
+    inStock: true,
+    tags: ['seasonal']
+  },
+  {
+    id: 12,
+    name: 'Marble Chess Set',
+    description: 'Hand-carved Carrara and Nero Marquina marble chess set with felted bases. The board doubles as a striking display piece.',
+    price: 1100,
+    category: 'Home',
+    imageUrl: 'https://images.unsplash.com/photo-1586165368502-1bad9cc4be10?w=600&h=700&fit=crop',
+    rating: 4.9,
+    reviewCount: 22,
+    inStock: true,
+    tags: ['handcrafted', 'home']
+  },
+  {
+    id: 13,
+    name: 'Saffiano Travel Wallet',
+    description: 'Full-size travel organizer in crosshatch saffiano leather. Compartments for passport, boarding pass, cards, and currencies.',
+    price: 540,
+    category: 'Accessories',
+    imageUrl: 'https://images.unsplash.com/photo-1627123424574-724758594e93?w=600&h=700&fit=crop',
+    rating: 4.7,
+    reviewCount: 67,
+    inStock: true,
+    tags: ['travel']
+  },
+  {
+    id: 14,
+    name: 'Linen Lounge Set',
+    description: 'Relaxed-fit French linen shirt and trouser set in natural ecru. Garment-washed for a lived-in, effortless drape.',
+    price: 680,
+    category: 'Apparel',
+    imageUrl: 'https://images.unsplash.com/photo-1602810318383-e386cc2a3ccf?w=600&h=700&fit=crop',
+    rating: 4.5,
+    reviewCount: 41,
+    inStock: true,
+    tags: ['seasonal', 'new-arrival']
+  },
+  {
+    id: 15,
+    name: 'Silver Tie Bar',
+    description: 'Brushed sterling silver tie bar with a discreet hallmark. Weighted for a clean, secure hold on any width necktie.',
+    price: 195,
+    category: 'Accessories',
+    imageUrl: 'https://images.unsplash.com/photo-1590874103328-eac38a683ce7?w=600&h=700&fit=crop',
+    rating: 4.3,
+    reviewCount: 88,
+    inStock: true,
+    tags: ['essentials']
+  },
+  {
+    id: 16,
+    name: 'Rosewood Humidor',
+    description: 'Spanish cedar-lined rosewood humidor with brass fittings and analog hygrometer. Holds up to 50 cigars.',
+    price: 750,
+    category: 'Home',
+    imageUrl: 'https://images.unsplash.com/photo-1600956054560-3a8ed28a9383?w=600&h=700&fit=crop',
+    rating: 4.6,
+    reviewCount: 19,
+    inStock: false,
+    tags: ['home', 'limited-edition']
+  }
+];
+
+export const PRODUCT_CATEGORIES: string[] = [
+  'All',
+  'Watches',
+  'Apparel',
+  'Accessories',
+  'Footwear',
+  'Home'
+];
