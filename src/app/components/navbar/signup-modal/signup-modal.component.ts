@@ -1,6 +1,7 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { AuthService } from '../../../services/auth.service';
 import { User } from 'src/app/models/user';
+import { NgForm } from '@angular/forms';
 
 @Component({
   selector: 'app-signup-modal',
@@ -11,29 +12,24 @@ export class SignupModalComponent {
   @Output() closed = new EventEmitter<void>();
   @Output() switchToLogin = new EventEmitter<void>();
 
+  user: User = new User();
 
-  user:User = new User();
+  constructor(private authService: AuthService) {}
 
-  constructor(private authService: AuthService) {
+  signup(signupForm: NgForm): void {
+    // console.log(signupForm.value);
+    // console.log(this.user);
 
+    this.authService.registerUser(signupForm.value).subscribe(
+      response => {
+        console.log('User registered successfully', response);
+        // Optionally close modal or switch to login here
+      },
+      error => {
+        console.error('Error registering user', error);
+      }
+    );
   }
-
-  signup(signupForm : any): void {
-    console.log(signupForm.value);
-    console.log(this.user);
-    }
-
-    ngOnInit(): void {
-      this.authService.registerUser(this.user).subscribe(
-        response => {
-          console.log('User registered successfully', response);
-        },
-        error => {
-          console.error('Error registering user', error);
-        }
-      );
-    }
-  
 
   closeModal(): void {
     this.closed.emit();
