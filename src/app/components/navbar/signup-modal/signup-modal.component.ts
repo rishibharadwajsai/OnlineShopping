@@ -25,15 +25,15 @@ export class SignupModalComponent {
     if (signupForm.invalid || this.passwordMismatch) {
       return;
     }
-    this.authService.registerUser(this.user).subscribe(
-      response => {
+    this.authService.registerUser(this.user).subscribe({
+      next: (response) => {
         console.log('User registered successfully', response);
-        // Optionally close modal or switch to login here
+        this.closeModal();
       },
-      error => {
+      error: (error) => {
         console.error('Error registering user', error);
       }
-    );
+    });
   }
 
   closeModal(): void {

@@ -20,15 +20,15 @@ export class LoginModalComponent {
     if (loginForm.invalid) {
       return;
     }
-    this.authService.loginUser(this.user).subscribe(
-      response => {
+    this.authService.loginUser(this.user).subscribe({
+      next: (response) => {
         console.log('User logged in successfully', response);
-        // Optionally close modal or switch to another page here
+        this.closeModal();
       },
-      error => {
+      error: (error) => {
         console.error('Error logging in user', error);
       }
-    );
+    });
   }
 
   closeModal(): void {
