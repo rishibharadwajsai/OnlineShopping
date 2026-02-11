@@ -1,5 +1,6 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { AuthService } from '../../../services/auth.service';
+import { User } from 'src/app/models/user';
 
 @Component({
   selector: 'app-signup-modal',
@@ -10,23 +11,16 @@ export class SignupModalComponent {
   @Output() closed = new EventEmitter<void>();
   @Output() switchToLogin = new EventEmitter<void>();
 
-  signupFirstName = '';
-  signupLastName = '';
-  signupEmail = '';
-  signupPassword = '';
+
+  user:User = new User();
 
   constructor(private authService: AuthService) {}
 
-  signup(): void {
-    if (this.signupFirstName && this.signupLastName && this.signupEmail && this.signupPassword) {
-      this.authService.signup(this.signupFirstName, this.signupLastName, this.signupEmail, this.signupPassword);
-      this.closed.emit();
-      this.signupFirstName = '';
-      this.signupLastName = '';
-      this.signupEmail = '';
-      this.signupPassword = '';
+  signup(signupForm : any): void {
+    console.log(signupForm.value);
+    console.log(this.user);
     }
-  }
+  
 
   closeModal(): void {
     this.closed.emit();
