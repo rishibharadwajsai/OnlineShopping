@@ -87,8 +87,9 @@
           <div *ngIf="confirm_password.errors?.['required']" >Confirm Password is required.</div>
           <div *ngIf="confirm_password.errors?.['minlength']" >Confirm Password must be at least 8 characters long.</div>
           <div *ngIf="confirm_password.errors?.['pattern']" >Confirm Password must contain at least one uppercase letter, one lowercase letter, one number, and one special character.</div>
-        </div>
       </div>
+      <div *ngIf="passwordMismatch" class="text-red-500 text-xs mt-1" style="font-family: var(--font-body);">Passwords do not match.</div>
+        </div>
       <div>
         <label class="block text-[10px] tracking-[0.15em] uppercase mb-2.5" style="font-family: var(--font-body); color: var(--color-ash);">
           Mobile

@@ -13,13 +13,18 @@ export class SignupModalComponent {
   @Output() switchToLogin = new EventEmitter<void>();
 
   user: User = new User();
+  passwordMismatch: boolean = false;
 
   constructor(private authService: AuthService) {}
 
   signup(signupForm: NgForm): void {
     // console.log(signupForm.value);
     // console.log(this.user);
-
+    this.passwordMismatch = this.user.password !== this.user.confirmPassword;
+    
+    if (signupForm.invalid || this.passwordMismatch) {
+      return;
+    }
     this.authService.registerUser(this.user).subscribe(
       response => {
         console.log('User registered successfully', response);
