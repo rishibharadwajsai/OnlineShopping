@@ -3,6 +3,7 @@ import { BehaviorSubject, Observable } from 'rxjs';
 import { Order } from '../models/user.model';
 import { User } from '../models/user';
 import { HttpClient } from '@angular/common/http';
+import { UserLogin } from '../models/user-login';
 
 @Injectable({
   providedIn: 'root'
@@ -101,5 +102,9 @@ export class AuthService {
 
   registerUser(user: User): Observable<any> {
     return this.http.post(this.registerUrl, user);
+  }
+
+  loginUser(user: UserLogin): Observable<any> {
+    return this.http.post(this.loginUrl, user);
   }
 }
