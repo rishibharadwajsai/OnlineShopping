@@ -30,19 +30,10 @@
                  style="font-family: var(--font-body); border: 1px solid var(--color-pearl); color: var(--color-charcoal);"
                  onfocus="this.style.borderColor='var(--color-gold)'"
                  onblur="this.style.borderColor='var(--color-pearl)'" required/>
+          <div *ngIf="name.invalid && (name.dirty || name.touched)" class="text-red-500 text-xs mt-1" style="font-family: var(--font-body);">
+            <div *ngIf="name.errors?.['required']" >Name is required.</div>
+          </div>
         </div>
-        <!-- <div>
-          <label class="block text-[10px] tracking-[0.15em] uppercase mb-2.5" style="font-family: var(--font-body); color: var(--color-ash);">
-            Last Name
-          </label>
-          <input type="text"
-                 [(ngModel)]="signupLastName"
-                 placeholder="Hartwell"
-                 class="w-full px-5 py-3.5 text-sm outline-none transition-all duration-300 rounded-sm"
-                 style="font-family: var(--font-body); border: 1px solid var(--color-pearl); color: var(--color-charcoal);"
-                 onfocus="this.style.borderColor='var(--color-gold)'"
-                 onblur="this.style.borderColor='var(--color-pearl)'" />
-        </div> -->
       </div>
       <div>
         <label class="block text-[10px] tracking-[0.15em] uppercase mb-2.5" style="font-family: var(--font-body); color: var(--color-ash);">
@@ -55,6 +46,10 @@
                style="font-family: var(--font-body); border: 1px solid var(--color-pearl); color: var(--color-charcoal);"
                onfocus="this.style.borderColor='var(--color-gold)'"
                onblur="this.style.borderColor='var(--color-pearl)'" required pattern="^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$"/>
+        <div *ngIf="email.invalid && (email.dirty || email.touched)" class="text-red-500 text-xs mt-1" style="font-family: var(--font-body);">
+          <div *ngIf="email.errors?.['required']" >Email is required.</div>
+          <div *ngIf="email.errors?.['pattern']" >Please enter a valid email address.</div>
+        </div>
       </div>
       <div>
         <label class="block text-[10px] tracking-[0.15em] uppercase mb-2.5" style="font-family: var(--font-body); color: var(--color-ash);">
@@ -69,6 +64,11 @@
                onblur="this.style.borderColor='var(--color-pearl)'"
                required minlength="8" pattern="^[A-Za-z0-9]+$"
               />
+        <div *ngIf="password.invalid && (password.dirty || password.touched)" class="text-red-500 text-xs mt-1" style="font-family: var(--font-body);">
+          <div *ngIf="password.errors?.['required']" >Password is required.</div>
+          <div *ngIf="password.errors?.['minlength']" >Password must be at least 8 characters long.</div>
+          <div *ngIf="password.errors?.['pattern']" >Password can only contain letters and numbers.</div>
+        </div>
       </div>
       <div>
         <label class="block text-[10px] tracking-[0.15em] uppercase mb-2.5" style="font-family: var(--font-body); color: var(--color-ash);">
@@ -83,6 +83,11 @@
                onblur="this.style.borderColor='var(--color-pearl)'"
                required minlength="8" pattern="^[A-Za-z0-9]+$"
               />
+        <div *ngIf="confirm_password.invalid && (confirm_password.dirty || confirm_password.touched)" class="text-red-500 text-xs mt-1" style="font-family: var(--font-body);">
+          <div *ngIf="confirm_password.errors?.['required']" >Confirm Password is required.</div>
+          <div *ngIf="confirm_password.errors?.['minlength']" >Confirm Password must be at least 8 characters long.</div>
+          <div *ngIf="confirm_password.errors?.['pattern']" >Confirm Password can only contain letters and numbers.</div>
+        </div>
       </div>
       <div>
         <label class="block text-[10px] tracking-[0.15em] uppercase mb-2.5" style="font-family: var(--font-body); color: var(--color-ash);">
@@ -97,6 +102,10 @@
                onblur="this.style.borderColor='var(--color-pearl)'"
                required pattern="^[0-9]{10}$"
               />
+        <div *ngIf="mobile.invalid && (mobile.dirty || mobile.touched)" class="text-red-500 text-xs mt-1" style="font-family: var(--font-body);">
+          <div *ngIf="mobile.errors?.['required']" >Mobile number is required.</div>
+          <div *ngIf="mobile.errors?.['pattern']" >Please enter a valid 10-digit mobile number.</div>
+        </div>
       </div>
       <button
               class="w-full py-4 text-xs tracking-[0.15em] uppercase rounded-sm transition-all duration-300 mt-2"
