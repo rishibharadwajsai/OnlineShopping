@@ -1,7 +1,7 @@
 import { Component, EventEmitter, HostListener, Input, Output } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from '../../../services/auth.service';
-import { User } from '../../../models/user.model';
+import { User } from '../../../models/user';
 
 @Component({
   selector: 'app-user-dropdown',

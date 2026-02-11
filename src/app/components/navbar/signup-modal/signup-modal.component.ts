@@ -14,11 +14,24 @@ export class SignupModalComponent {
 
   user:User = new User();
 
-  constructor(private authService: AuthService) {}
+  constructor(private authService: AuthService) {
+
+  }
 
   signup(signupForm : any): void {
     console.log(signupForm.value);
     console.log(this.user);
+    }
+
+    ngOnInit(): void {
+      this.authService.registerUser(this.user).subscribe(
+        response => {
+          console.log('User registered successfully', response);
+        },
+        error => {
+          console.error('Error registering user', error);
+        }
+      );
     }
   
 

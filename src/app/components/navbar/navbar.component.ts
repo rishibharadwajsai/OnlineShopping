@@ -3,7 +3,7 @@ import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { CartService } from '../../services/cart.service';
 import { AuthService } from '../../services/auth.service';
-import { User } from '../../models/user.model';
+import { User } from '../../models/user';
 
 @Component({
   selector: 'app-navbar',

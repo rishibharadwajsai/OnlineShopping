@@ -1,13 +1,19 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
-import { User, Order } from '../models/user.model';
+import { Order } from '../models/user.model';
+import { User } from '../models/user';
+import { HttpClient } from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
+  private registerUrl = 'http://localhost:5071/api/auth/register';
+  private loginUrl = 'http://localhost:5071/api/auth/login';
   private currentUser$ = new BehaviorSubject<User | null>(null);
   private isLoggedIn$ = new BehaviorSubject<boolean>(false);
+
+  constructor(private http: HttpClient) { }
 
   private mockOrders: Order[] = [
     {
@@ -52,29 +58,29 @@ export class AuthService {
   login(email: string, password: string): boolean {
     // Mock login
     const mockUser: User = {
-      id: 1,
-      firstName: 'Alexander',
-      lastName: 'Hartwell',
-      email: email,
-      avatarUrl: ''
+      Name: 'Rishi Bharadwaj Sai',
+      Email: 'rishi@gmail.com',
+      Password: 'password123',
+      ConfirmPassword: 'password123',
+      Mobile: '1234567890',
     };
     this.currentUser$.next(mockUser);
     this.isLoggedIn$.next(true);
     return true;
   }
 
-  signup(firstName: string, lastName: string, email: string, password: string): boolean {
-    const newUser: User = {
-      id: 1,
-      firstName,
-      lastName,
-      email,
-      avatarUrl: ''
-    };
-    this.currentUser$.next(newUser);
-    this.isLoggedIn$.next(true);
-    return true;
-  }
+  // signup(firstName: string, lastName: string, email: string, password: string): boolean {
+  //   const newUser: User = {
+  //     id: 1,
+  //     firstName,
+  //     lastName,
+  //     email,
+  //     avatarUrl: ''
+  //   };
+  //   this.currentUser$.next(newUser);
+  //   this.isLoggedIn$.next(true);
+  //   return true;
+  // }
 
   logout(): void {
     this.currentUser$.next(null);
@@ -88,8 +94,12 @@ export class AuthService {
   getUserInitials(): string {
     const user = this.currentUser$.value;
     if (user) {
-      return `${user.firstName.charAt(0)}${user.lastName.charAt(0)}`;
+      return `${user.Name.charAt(0)}${user.Name.charAt(1)}`;
     }
     return '';
+  }
+
+  registerUser(user: User): Observable<any> {
+    return this.http.post(this.registerUrl, user);
   }
 }

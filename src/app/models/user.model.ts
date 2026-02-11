@@ -1,11 +1,3 @@
-export interface User {
-  id: number;
-  firstName: string;
-  lastName: string;
-  email: string;
-  avatarUrl?: string;
-}
-
 export interface Order {
   id: string;
   date: Date;

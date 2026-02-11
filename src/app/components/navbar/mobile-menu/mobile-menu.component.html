@@ -64,8 +64,8 @@
           {{ getUserInitials() }}
         </div>
         <div>
-          <p class="text-sm" style="font-family: var(--font-heading);">{{ currentUser?.firstName }} {{ currentUser?.lastName }}</p>
-          <p class="text-xs" style="color: var(--color-ash);">{{ currentUser?.email }}</p>
+          <p class="text-sm" style="font-family: var(--font-heading);">{{ currentUser?.Name }}</p>
+          <p class="text-xs" style="color: var(--color-ash);">{{ currentUser?.Email }}</p>
         </div>
       </div>
       <button (click)="navigateToOrders()"
