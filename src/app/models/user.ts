@@ -1,7 +1,7 @@
 export class User {
-    Name!:string;
-    Email!:string;
-    Password!:string;
-    ConfirmPassword!:string;
-    Mobile!:string;
+    name!:string;
+    email!:string;
+    password!:string;
+    confirmPassword!:string;
+    mobile!:string;
 }

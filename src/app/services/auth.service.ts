@@ -58,11 +58,11 @@ export class AuthService {
   login(email: string, password: string): boolean {
     // Mock login
     const mockUser: User = {
-      Name: 'Rishi Bharadwaj Sai',
-      Email: 'rishi@gmail.com',
-      Password: 'password123',
-      ConfirmPassword: 'password123',
-      Mobile: '1234567890',
+      name: 'Rishi Bharadwaj Sai',
+      email: 'rishi@gmail.com',
+      password: 'password123',
+      confirmPassword: 'password123',
+      mobile: '1234567890',
     };
     this.currentUser$.next(mockUser);
     this.isLoggedIn$.next(true);
@@ -94,7 +94,7 @@ export class AuthService {
   getUserInitials(): string {
     const user = this.currentUser$.value;
     if (user) {
-      return `${user.Name.charAt(0)}${user.Name.charAt(1)}`;
+      return `${user.name.charAt(0)}${user.name.charAt(1)}`;
     }
     return '';
   }

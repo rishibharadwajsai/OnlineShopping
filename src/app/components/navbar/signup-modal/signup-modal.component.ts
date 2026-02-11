@@ -20,7 +20,7 @@ export class SignupModalComponent {
     // console.log(signupForm.value);
     // console.log(this.user);
 
-    this.authService.registerUser(signupForm.value).subscribe(
+    this.authService.registerUser(this.user).subscribe(
       response => {
         console.log('User registered successfully', response);
         // Optionally close modal or switch to login here
