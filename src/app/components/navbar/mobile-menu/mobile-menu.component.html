@@ -1,0 +1,83 @@
+<!-- Mobile Menu Overlay -->
+<div *ngIf="show"
+     class="fixed inset-0 z-40 md:hidden animate-fade-in"
+     style="background-color: rgba(44, 44, 44, 0.3); backdrop-filter: blur(4px);"
+     (click)="close()">
+</div>
+
+<!-- Mobile Menu Panel -->
+<div *ngIf="show"
+     class="fixed top-0 right-0 h-full w-80 max-w-[85vw] z-50 md:hidden overflow-y-auto"
+     style="background-color: var(--color-warm-white); box-shadow: var(--shadow-floating); animation: slideInRight 0.35s var(--ease-luxury) both;">
+
+  <div class="p-6">
+    <!-- Close -->
+    <div class="flex justify-end mb-8">
+      <button (click)="close()" class="p-2">
+        <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" style="color: var(--color-slate);" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+        </svg>
+      </button>
+    </div>
+
+    <!-- Mobile Nav Links -->
+    <div class="space-y-6">
+      <a (click)="navigateHome()"
+         class="block text-base tracking-[0.15em] uppercase cursor-pointer"
+         style="font-family: var(--font-heading); color: var(--color-charcoal);">
+        Home
+      </a>
+      <a routerLink="/" fragment="collection" (click)="close()"
+         class="block text-base tracking-[0.15em] uppercase cursor-pointer"
+         style="font-family: var(--font-heading); color: var(--color-charcoal);">
+        Collection
+      </a>
+      <a (click)="navigateToCart()"
+         class="block text-base tracking-[0.15em] uppercase cursor-pointer"
+         style="font-family: var(--font-heading); color: var(--color-charcoal);">
+        Cart
+        <span *ngIf="cartCount > 0" class="text-xs ml-2" style="color: var(--color-gold);">({{ cartCount }})</span>
+      </a>
+    </div>
+
+    <!-- Divider -->
+    <div class="my-8" style="border-top: 1px solid var(--color-parchment);"></div>
+
+    <!-- Auth Buttons or User Info -->
+    <div *ngIf="!isLoggedIn" class="space-y-3">
+      <button (click)="onOpenLogin()"
+              class="w-full py-3 text-xs tracking-[0.12em] uppercase rounded-sm transition-all duration-300"
+              style="font-family: var(--font-body); border: 1px solid var(--color-pearl); color: var(--color-charcoal);">
+        Sign In
+      </button>
+      <button (click)="onOpenSignup()"
+              class="w-full py-3 text-xs tracking-[0.12em] uppercase rounded-sm transition-all duration-300"
+              style="font-family: var(--font-body); background-color: var(--color-charcoal); color: var(--color-cream);">
+        Register
+      </button>
+    </div>
+
+    <div *ngIf="isLoggedIn" class="space-y-4">
+      <div class="flex items-center gap-3">
+        <div class="w-10 h-10 rounded-full flex items-center justify-center text-sm font-semibold"
+             style="background-color: var(--color-parchment); color: var(--color-charcoal); font-family: var(--font-heading);">
+          {{ getUserInitials() }}
+        </div>
+        <div>
+          <p class="text-sm" style="font-family: var(--font-heading);">{{ currentUser?.firstName }} {{ currentUser?.lastName }}</p>
+          <p class="text-xs" style="color: var(--color-ash);">{{ currentUser?.email }}</p>
+        </div>
+      </div>
+      <button (click)="navigateToOrders()"
+              class="w-full text-left py-2 text-xs tracking-[0.08em] uppercase"
+              style="font-family: var(--font-body); color: var(--color-slate);">
+        → Order History
+      </button>
+      <button (click)="logout()"
+              class="w-full text-left py-2 text-xs tracking-[0.08em] uppercase"
+              style="font-family: var(--font-body); color: var(--color-error);">
+        → Sign Out
+      </button>
+    </div>
+  </div>
+</div>

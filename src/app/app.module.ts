@@ -8,6 +8,12 @@ import { AppComponent } from './app.component';
 
 // Layout Components
 import { NavbarComponent } from './components/navbar/navbar.component';
+import { AnnouncementBarComponent } from './components/navbar/announcement-bar/announcement-bar.component';
+import { SearchOverlayComponent } from './components/navbar/search-overlay/search-overlay.component';
+import { LoginModalComponent } from './components/navbar/login-modal/login-modal.component';
+import { SignupModalComponent } from './components/navbar/signup-modal/signup-modal.component';
+import { MobileMenuComponent } from './components/navbar/mobile-menu/mobile-menu.component';
+import { UserDropdownComponent } from './components/navbar/user-dropdown/user-dropdown.component';
 import { FooterComponent } from './components/footer/footer.component';
 import { HeroComponent } from './components/hero/hero.component';
 import { ProductCardComponent } from './components/product-card/product-card.component';
@@ -23,6 +29,12 @@ import { OrdersComponent } from './pages/orders/orders.component';
   declarations: [
     AppComponent,
     NavbarComponent,
+    AnnouncementBarComponent,
+    SearchOverlayComponent,
+    LoginModalComponent,
+    SignupModalComponent,
+    MobileMenuComponent,
+    UserDropdownComponent,
     FooterComponent,
     HeroComponent,
     ProductCardComponent,

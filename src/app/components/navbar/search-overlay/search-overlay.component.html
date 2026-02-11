@@ -1,0 +1,55 @@
+<div *ngIf="show"
+     class="fixed inset-0 z-[60] flex flex-col animate-fade-in"
+     style="background-color: rgba(253, 251, 247, 0.98); backdrop-filter: blur(20px);">
+
+  <!-- Search Header -->
+  <div class="max-w-3xl w-full mx-auto px-6 pt-16">
+    <div class="flex items-center justify-between mb-8">
+      <h2 class="text-2xl tracking-[0.1em] uppercase" style="font-family: var(--font-heading); color: var(--color-charcoal);">
+        Search
+      </h2>
+      <button (click)="closeSearch()" class="p-2 rounded-full transition-all duration-300 hover:bg-[#EDE8DF]">
+        <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" style="color: var(--color-slate);" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+        </svg>
+      </button>
+    </div>
+
+    <!-- Search Input -->
+    <div class="relative">
+      <svg xmlns="http://www.w3.org/2000/svg" class="absolute left-0 top-1/2 -translate-y-1/2 w-5 h-5" style="color: var(--color-ash);" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z" />
+      </svg>
+      <input id="search-input"
+             type="text"
+             [(ngModel)]="searchQuery"
+             (input)="onSearch()"
+             placeholder="Search our collection..."
+             class="w-full pl-8 pr-4 py-4 text-lg bg-transparent outline-none"
+             style="font-family: var(--font-subheading); color: var(--color-charcoal); border-bottom: 1px solid var(--color-pearl); letter-spacing: 0.02em;"
+             (keydown.escape)="closeSearch()" />
+    </div>
+
+    <!-- Search Results -->
+    <div class="mt-8 space-y-2 max-h-[60vh] overflow-y-auto">
+      <div *ngFor="let product of searchResults"
+           (click)="selectSearchResult(product)"
+           class="flex items-center gap-4 p-4 rounded-sm cursor-pointer transition-all duration-200"
+           style="border: 1px solid transparent;"
+           onmouseover="this.style.backgroundColor='var(--color-parchment)'; this.style.borderColor='var(--color-pearl)'"
+           onmouseout="this.style.backgroundColor='transparent'; this.style.borderColor='transparent'">
+        <img [src]="product.imageUrl" [alt]="product.name" class="w-16 h-16 object-cover rounded-sm" />
+        <div>
+          <p class="text-sm" style="font-family: var(--font-heading); color: var(--color-charcoal);">{{ product.name }}</p>
+          <p class="text-xs mt-1" style="color: var(--color-gold-dark); font-family: var(--font-body);">
+            {{ product.price | currency:'USD' }} · {{ product.category }}
+          </p>
+        </div>
+      </div>
+      <p *ngIf="searchQuery.length > 1 && searchResults.length === 0"
+         class="text-center py-12 text-sm" style="color: var(--color-ash); font-family: var(--font-subheading); font-style: italic;">
+        No pieces found matching "{{ searchQuery }}"
+      </p>
+    </div>
+  </div>
+</div>

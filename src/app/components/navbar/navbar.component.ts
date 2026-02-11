@@ -3,9 +3,7 @@ import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { CartService } from '../../services/cart.service';
 import { AuthService } from '../../services/auth.service';
-import { ProductService } from '../../services/product.service';
 import { User } from '../../models/user.model';
-import { Product } from '../../models/product.model';
 
 @Component({
   selector: 'app-navbar',
@@ -15,32 +13,18 @@ import { Product } from '../../models/product.model';
 export class NavbarComponent implements OnInit, OnDestroy {
   cartCount = 0;
   isScrolled = false;
-  showUserDropdown = false;
   showMobileMenu = false;
   showSearchOverlay = false;
   showLoginModal = false;
   showSignupModal = false;
   isLoggedIn = false;
   currentUser: User | null = null;
-  searchQuery = '';
-  searchResults: Product[] = [];
-
-  // Login form
-  loginEmail = '';
-  loginPassword = '';
-
-  // Signup form
-  signupFirstName = '';
-  signupLastName = '';
-  signupEmail = '';
-  signupPassword = '';
 
   private subscriptions: Subscription[] = [];
 
   constructor(
     private cartService: CartService,
     private authService: AuthService,
-    private productService: ProductService,
     private router: Router
   ) {}
 
@@ -61,37 +45,21 @@ export class NavbarComponent implements OnInit, OnDestroy {
     this.isScrolled = window.scrollY > 50;
   }
 
-  @HostListener('document:click', ['$event'])
-  onDocumentClick(event: Event): void {
-    const target = event.target as HTMLElement;
-    if (!target.closest('.user-dropdown-container')) {
-      this.showUserDropdown = false;
-    }
-  }
-
-  toggleUserDropdown(event: Event): void {
-    event.stopPropagation();
-    this.showUserDropdown = !this.showUserDropdown;
-  }
-
+  // --- Mobile Menu ---
   toggleMobileMenu(): void {
     this.showMobileMenu = !this.showMobileMenu;
-    if (this.showMobileMenu) {
-      document.body.style.overflow = 'hidden';
-    } else {
-      document.body.style.overflow = '';
-    }
+    document.body.style.overflow = this.showMobileMenu ? 'hidden' : '';
   }
 
+  closeMobileMenu(): void {
+    this.showMobileMenu = false;
+    document.body.style.overflow = '';
+  }
+
+  // --- Search Overlay ---
   openSearch(): void {
     this.showSearchOverlay = true;
-    this.searchQuery = '';
-    this.searchResults = [];
     document.body.style.overflow = 'hidden';
-    setTimeout(() => {
-      const input = document.getElementById('search-input');
-      if (input) input.focus();
-    }, 100);
   }
 
   closeSearch(): void {
@@ -99,21 +67,7 @@ export class NavbarComponent implements OnInit, OnDestroy {
     document.body.style.overflow = '';
   }
 
-  onSearch(): void {
-    if (this.searchQuery.trim().length > 1) {
-      this.productService.searchProducts(this.searchQuery).subscribe(
-        results => this.searchResults = results
-      );
-    } else {
-      this.searchResults = [];
-    }
-  }
-
-  selectSearchResult(product: Product): void {
-    this.closeSearch();
-    this.router.navigate(['/product', product.id]);
-  }
-
+  // --- Auth Modals ---
   openLoginModal(): void {
     this.showLoginModal = true;
     this.showSignupModal = false;
@@ -134,36 +88,7 @@ export class NavbarComponent implements OnInit, OnDestroy {
     document.body.style.overflow = '';
   }
 
-  login(): void {
-    if (this.loginEmail && this.loginPassword) {
-      this.authService.login(this.loginEmail, this.loginPassword);
-      this.closeModals();
-      this.loginEmail = '';
-      this.loginPassword = '';
-    }
-  }
-
-  signup(): void {
-    if (this.signupFirstName && this.signupLastName && this.signupEmail && this.signupPassword) {
-      this.authService.signup(this.signupFirstName, this.signupLastName, this.signupEmail, this.signupPassword);
-      this.closeModals();
-      this.signupFirstName = '';
-      this.signupLastName = '';
-      this.signupEmail = '';
-      this.signupPassword = '';
-    }
-  }
-
-  logout(): void {
-    this.authService.logout();
-    this.showUserDropdown = false;
-    this.router.navigate(['/']);
-  }
-
-  getUserInitials(): string {
-    return this.authService.getUserInitials();
-  }
-
+  // --- Navigation ---
   navigateHome(): void {
     this.router.navigate(['/']);
     this.showMobileMenu = false;
@@ -172,10 +97,5 @@ export class NavbarComponent implements OnInit, OnDestroy {
   navigateToCart(): void {
     this.router.navigate(['/cart']);
     this.showMobileMenu = false;
-  }
-
-  navigateToOrders(): void {
-    this.router.navigate(['/orders']);
-    this.showUserDropdown = false;
   }
 }
